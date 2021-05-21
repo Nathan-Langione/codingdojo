@@ -48,15 +48,25 @@
             left: 40px;
             top: 40px;
         }
+        #ghost1 {
+            background-color: black; 
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('pinky.gif');
+            background-size: contain;
+            position: absolute;
+            left: 120px;
+            top: 120px;
+        }
         #lblScore {
             background-color: blue; 
             height: 40x;
-            width: 120px;
+            width: 80px;
             position: absolute;
             top: 2%;
             left: 25%;
-            margin-right: -50%;
-            transform: translate(-50%, -50%) 
+            color: gold;   
         }
         
     </style>
@@ -64,7 +74,10 @@
 <body>
 <div id ='world'></div>
 <div id='ninjaman'></div>
-<div id="lblScore">Score: 0</div>
+<div id="lblScore"></div>
+<div id="ghost1"></div>
+
+
 
 </body>
 <script type="text/javascript">
@@ -77,8 +90,8 @@
     var world = [
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-        [1,1,random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),1,1],
-        [1,1,random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),1,1],
+        [1,1,0,0,random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),1,1],
+        [1,1,0,random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),1,1],
         [1,1,random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),1,1],
         [1,1,random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),1,1],
         [1,1,random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),random(4),1,1],
@@ -107,16 +120,6 @@
         3: 'onigiri',
     }
     
-    var score = 0;
-    console.log("score= "+score);
-    
-    function drawlblScore(){
-        var lblScore = document.getElementById('lblScore');
-        lblScore.innerHTML="Score: " + score;
-    }
-    
-    
-
     function drawWorld(){
         var output = "";
 
@@ -132,6 +135,14 @@
             output;
     }
     drawWorld();
+
+    var score = 0;
+
+    function drawlblScore(){
+        var lblScore = document.getElementById('lblScore');
+        lblScore.innerHTML="Score: " + score;   
+    }
+    drawlblScore();
 
     var ninjaman = {
         x: 2,
