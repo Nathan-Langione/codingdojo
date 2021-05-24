@@ -56,8 +56,8 @@
             background-image: url('pinky.gif');
             background-size: contain;
             position: absolute;
-            left: 160px;
-            top: 320px;
+            left: 40px;
+            top: 40px;
         }
         #ghost1 {
             background-color: black; 
@@ -67,8 +67,8 @@
             background-image: url('pumpky.gif');
             background-size: contain;
             position: absolute;
-            left: 160px;
-            top: 80px;
+            left: 40px;
+            top: 40px;
         }
         #ghost2 {
             background-color: black; 
@@ -78,8 +78,8 @@
             background-image: url('red.gif');
             background-size: contain;
             position: absolute;
-            left: 320px;
-            top: 160px;
+            left: 40px;
+            top: 40px;
         }
         #lblScore {
             background-color: blue; 
@@ -160,6 +160,8 @@
     }
     drawWorld();
 
+    var lives = 3;
+
     var score = 0;
 
     function drawlblScore(){
@@ -182,31 +184,55 @@
     drawNinjaman();
 
     var ghost0 = {
-        x: 2,
-        y: 2
+        x: 4,
+        y: 4
     }
     var ghost1 = {
-        x: 2,
-        y: 2
+        x: 4,
+        y: 6
     }
     var ghost2 = {
-        x: 2,
-        y: 2
+        x: 8,
+        y: 8
     }
 
     function drawGhost(){
-        for(var i = 0; i < 3; i++){
-            var gnum = "ghost" + i
-            console.log(gnum)
-            document.getElementById(gnum).style.top = 
-                gnum.y * 40 + 'px'
-            document.getElementById(gnum).style.left = 
-                gnum.x * 40 + 'px'
+        document.getElementById('ghost0').style.top = 
+            ghost0.y * 40 + 'px'
+        document.getElementById('ghost0').style.left = 
+            ghost0.x * 40 + 'px'
+        document.getElementById('ghost1').style.top = 
+            ghost1.y * 40 + 'px'
+        document.getElementById('ghost1').style.left = 
+            ghost1.x * 40 + 'px'
+        document.getElementById('ghost2').style.top = 
+            ghost2.y * 40 + 'px'
+        document.getElementById('ghost2').style.left = 
+            ghost2.x * 40 + 'px'
+    }
+    
+    drawGhost();
+
+    function moveGhost(i){
+        var mvmt = Math.floor(Math.random() * 4);
+        var i;
+        //left mvmt
+        if(mvmt ===0 && (world[i.y][i.x-1] !==1)){
+        i.x--;
+        } 
+        //right mvmt
+        else if(mvmt ===1 && (world[i.y][i.x+1] !==1)){
+        i.x++;
+        }
+        //up mvmt
+        else if(mvmt ===2 && (world[i.y-1][i.x] !==1)){
+        i.y--;
+        }
+        //down mvmt
+        else if(mvmt ===3 && (world[i.y+1][i.x] !==1)){
+        i.y++;
         }
     }
-
-
-    drawGhost();
 
     document.onkeydown = function(e){
         
@@ -248,6 +274,9 @@
         }
     drawlblScore();
     drawNinjaman()
+    moveGhost(ghost0);
+    moveGhost(ghost1);
+    moveGhost(ghost2);
     drawGhost();
     drawWorld()
     }
