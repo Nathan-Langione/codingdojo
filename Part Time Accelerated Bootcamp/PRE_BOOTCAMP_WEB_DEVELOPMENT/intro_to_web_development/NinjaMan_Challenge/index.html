@@ -90,6 +90,15 @@
             left: 25%;
             color: gold;   
         }
+        #lblLives {
+            background-color: blue; 
+            height: 40x;
+            width: 80px;
+            position: absolute;
+            top: 2%;
+            left: 50%;
+            color: gold;   
+        }
         
     </style>
 </head>
@@ -97,6 +106,7 @@
 <div id ='world'></div>
 <div id='ninjaman'></div>
 <div id="lblScore"></div>
+<div id="lblLives"></div>
 <div id="ghost0"></div>
 <div id="ghost1"></div>
 <div id="ghost2"></div>
@@ -162,6 +172,12 @@
 
     var lives = 3;
 
+    function drawlblLives(){
+        var lblLives = document.getElementById('lblLives');
+        lblLives.innerHTML="Lives: " + lives;   
+    }
+    drawlblLives();   
+    
     var score = 0;
 
     function drawlblScore(){
@@ -196,6 +212,7 @@
         y: 8
     }
 
+    //this should be a for loop instead of 6 statements, but ran into issues trying to insert the ghost name as a string in getElementById 
     function drawGhost(){
         document.getElementById('ghost0').style.top = 
             ghost0.y * 40 + 'px'
@@ -213,20 +230,23 @@
     
     drawGhost();
 
+    //I should be able to call function once and iterate through the ghosts using a for loop
+    // for(var i = 0; i < 3; i++)
+    //however I kept running into type issues when trying to popualte the ghost name as a var and insert it in the statements
     function moveGhost(i){
-        var mvmt = Math.floor(Math.random() * 4);
+        var mvmt = random(4);
         var i;
         //left mvmt
         if(mvmt ===0 && (world[i.y][i.x-1] !==1)){
         i.x--;
         } 
-        //right mvmt
-        else if(mvmt ===1 && (world[i.y][i.x+1] !==1)){
-        i.x++;
-        }
         //up mvmt
         else if(mvmt ===2 && (world[i.y-1][i.x] !==1)){
         i.y--;
+        }
+        //right mvmt
+        else if(mvmt ===1 && (world[i.y][i.x+1] !==1)){
+        i.x++;
         }
         //down mvmt
         else if(mvmt ===3 && (world[i.y+1][i.x] !==1)){
@@ -272,13 +292,30 @@
             score+=5;
             console.log("score= "+score);
         }
+        if((ninjaman.x === ghost0.x) && (ninjaman.y === ghost0.y)){
+        lives -=1;
+        console.log("Lives= "+lives);
+        }
+        else if((ninjaman.x === ghost1.x) && (ninjaman.y === ghost1.y)){
+        lives -=1;
+        console.log("Lives= "+lives);
+        }
+        else if((ninjaman.x === ghost2.x) && (ninjaman.y === ghost2.y)){
+        lives -=1;
+        console.log("Lives= "+lives);
+        }
+        if(lives ===0){
+            document.write("<h1>Game Over!</h1></br>Your score = "+score + " points!")
+        }
     drawlblScore();
-    drawNinjaman()
+    drawlblLives();
+    drawNinjaman();
+    //I should be able to call moveGhost once if I was able to get it to loop correctly
     moveGhost(ghost0);
     moveGhost(ghost1);
     moveGhost(ghost2);
     drawGhost();
-    drawWorld()
+    drawWorld();
     }
 </script>
 </html>
