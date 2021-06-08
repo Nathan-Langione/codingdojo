@@ -1,0 +1,43 @@
+div{
+    border: 10px;
+    border-color: black;
+    margin: auto;
+}
+
+.header{
+    background-color: aqua;
+    height: 200px;
+    width: 1700px;
+    
+}
+
+.sidebar{
+    background-color: blue;
+    float: left;
+    text-align: center;
+    width: 200px;
+    height: 500px;
+
+}
+
+.main{
+    background-color: blue;
+    float: right;
+    text-align: center;
+    width: 1500px;
+    height: 500px;
+}
+
+.head1{
+    width: 85%;
+    display: block;
+    float: left;    
+    height: 100%;
+    text-align: center;
+}
+
+.head2{
+    display: block;
+    float: right;    
+    height: 100%;
+}
